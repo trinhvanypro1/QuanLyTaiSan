@@ -1,0 +1,18 @@
+{
+    "name": "Bangiaotaisan",
+    "alias": "bangiaotaisan",
+    "description": "",
+    "keywords": [],
+    "version": "1.0.0",
+	"active": 1,
+    "order": 1,
+    "providers": [
+        "Modules\\Bangiaotaisan\\Providers\\BangiaotaisanServiceProvider",
+        "Modules\\Bangiaotaisan\\Providers\\RouteServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        
+    ],
+    "requires": []
+}
