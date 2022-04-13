@@ -6,6 +6,7 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Bangiaotaisan\Entities\Bangiaotaisan;
+use Modules\Danhmuctaisan\Entities\Nhaptaisan;
 use Modules\Thuhoitaisan\Entities\Thuhoitaisan;
 use Modules\Thuhoitaisan\Http\Requests\CreateThuhoitaisanRequest;
 use Modules\Thuhoitaisan\Http\Requests\UpdateThuhoitaisanRequest;
@@ -32,14 +33,14 @@ class ThuhoitaisanController extends AdminBaseController
      * @param  Thuhoitaisan $thuhoitaisan
      * @return Response
      */
-    public function index(Thuhoitaisan $thuhoitaisan)
+    public function index()
     {
         $muontaisans = DB::table('bangiaotaisan')->get();
         $join_taisan = DB::table('taisan')->get();
         $join_phongban = DB::table('danhmucphongban')->get();
         $join_nhanvien = DB::table('danhmucnhanvien')->get();
         $join_user = DB::table('users')->get();
-        return view('thuhoitaisan::admin.thuhoitaisans.index', compact('thuhoitaisan'))
+        return view('thuhoitaisan::admin.thuhoitaisans.index')
             ->with('join_taisan',$join_taisan)
             ->with('join_user',$join_user)
             ->with('join_phongban',$join_phongban)
@@ -47,17 +48,28 @@ class ThuhoitaisanController extends AdminBaseController
             ->with('muontaisans',$muontaisans);
     }
 
+    public function thuhoi(Bangiaotaisan $bangiaotaisan){
+        $taisans=DB::table('taisan')->get();
+        $users = DB::table('users')->get();
+        $phongbans = DB::table('danhmucphongban')->get();
+        $nhanviens = DB::table('danhmucnhanvien')->get();
+        return view('thuhoitaisan::admin.thuhoitaisans.thuhoi',compact('bangiaotaisan'))
+        ->with('taisans',$taisans)
+        ->with('users',$users)
+        ->with('phongbans',$phongbans)
+        ->with('nhanviens',$nhanviens);
+    }
     /**
      * Show the form for editing the specified resource.
      *
      * @param  Bangiaotaisan $bangiaotaisan
      * @return Response
      */
-    public function create(Bangiaotaisan $bangiaotaisan)
+    public function create()
     {
-        $join_taisan = DB::table('taisan')->get();
-        return view('thuhoitaisan::admin.thuhoitaisans.create',compact('bangiaotaisan'))
-        ->with('join_taisan',$join_taisan);
+
+        
+        return view('thuhoitaisan::admin.thuhoitaisans.create');
     }
 
     /**

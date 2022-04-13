@@ -22,6 +22,10 @@ $router->group(['prefix' =>'/thuhoitaisan'], function (Router $router) {
         'uses' => 'ThuhoitaisanController@store',
         'middleware' => 'can:thuhoitaisan.thuhoitaisans.create'
     ]);
+    $router->get('thuhoitaisans/{bangiaotaisan}/thuhoi', [
+        'as' => 'admin.thuhoitaisan.thuhoitaisan.thuhoi',
+        'uses' => 'ThuhoitaisanController@thuhoi'
+    ]);
     $router->get('thuhoitaisans/{thuhoitaisan}/edit', [
         'as' => 'admin.thuhoitaisan.thuhoitaisan.edit',
         'uses' => 'ThuhoitaisanController@edit',

@@ -43,6 +43,40 @@ $router->group(['prefix' =>'/bangiaotaisan'], function (Router $router) {
         'uses' => 'BangiaotaisanController@destroy',
         'middleware' => 'can:bangiaotaisan.bangiaotaisans.destroy'
     ]);
+    $router->bind('thuhoitaisan', function ($id) {
+        return app('Modules\Bangiaotaisan\Repositories\thuhoitaisanRepository')->find($id);
+    });
+    $router->get('thuhoitaisans', [
+        'as' => 'admin.bangiaotaisan.thuhoitaisan.index',
+        'uses' => 'thuhoitaisanController@index',
+        'middleware' => 'can:bangiaotaisan.thuhoitaisans.index'
+    ]);
+    $router->get('thuhoitaisans/create', [
+        'as' => 'admin.bangiaotaisan.thuhoitaisan.create',
+        'uses' => 'thuhoitaisanController@create',
+        'middleware' => 'can:bangiaotaisan.thuhoitaisans.create'
+    ]);
+    $router->post('thuhoitaisans', [
+        'as' => 'admin.bangiaotaisan.thuhoitaisan.store',
+        'uses' => 'thuhoitaisanController@store',
+        'middleware' => 'can:bangiaotaisan.thuhoitaisans.create'
+    ]);
+    $router->get('thuhoitaisans/{thuhoitaisan}/edit', [
+        'as' => 'admin.bangiaotaisan.thuhoitaisan.edit',
+        'uses' => 'thuhoitaisanController@edit',
+        'middleware' => 'can:bangiaotaisan.thuhoitaisans.edit'
+    ]);
+    $router->put('thuhoitaisans/{thuhoitaisan}', [
+        'as' => 'admin.bangiaotaisan.thuhoitaisan.update',
+        'uses' => 'thuhoitaisanController@update',
+        'middleware' => 'can:bangiaotaisan.thuhoitaisans.edit'
+    ]);
+    $router->delete('thuhoitaisans/{thuhoitaisan}', [
+        'as' => 'admin.bangiaotaisan.thuhoitaisan.destroy',
+        'uses' => 'thuhoitaisanController@destroy',
+        'middleware' => 'can:bangiaotaisan.thuhoitaisans.destroy'
+    ]);
 // append
+
 
 });

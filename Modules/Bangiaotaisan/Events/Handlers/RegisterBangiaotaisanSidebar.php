@@ -52,7 +52,17 @@ class RegisterBangiaotaisanSidebar implements \Maatwebsite\Sidebar\SidebarExtend
                         $this->auth->hasAccess('bangiaotaisan.bangiaotaisans.index')
                     );
                 });
+                $item->item(trans('bangiaotaisan::thuhoitaisans.title.thuhoitaisans'), function (Item $item) {
+                    $item->icon('fa fa-copy');
+                    $item->weight(0);
+                    $item->append('admin.bangiaotaisan.thuhoitaisan.create');
+                    $item->route('admin.bangiaotaisan.thuhoitaisan.index');
+                    $item->authorize(
+                        $this->auth->hasAccess('bangiaotaisan.thuhoitaisans.index')
+                    );
+                });
 // append
+
 
             });
         });

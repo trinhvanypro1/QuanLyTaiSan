@@ -30,7 +30,9 @@ class BangiaotaisanServiceProvider extends ServiceProvider
 
         $this->app['events']->listen(LoadingBackendTranslations::class, function (LoadingBackendTranslations $event) {
             $event->load('bangiaotaisans', array_dot(trans('bangiaotaisan::bangiaotaisans')));
+            $event->load('thuhoitaisans', array_dot(trans('bangiaotaisan::thuhoitaisans')));
             // append translations
+
 
         });
     }
@@ -66,7 +68,20 @@ class BangiaotaisanServiceProvider extends ServiceProvider
                 return new \Modules\Bangiaotaisan\Repositories\Cache\CacheBangiaotaisanDecorator($repository);
             }
         );
+        $this->app->bind(
+            'Modules\Bangiaotaisan\Repositories\thuhoitaisanRepository',
+            function () {
+                $repository = new \Modules\Bangiaotaisan\Repositories\Eloquent\EloquentthuhoitaisanRepository(new \Modules\Bangiaotaisan\Entities\thuhoitaisan());
+
+                if (! config('app.cache')) {
+                    return $repository;
+                }
+
+                return new \Modules\Bangiaotaisan\Repositories\Cache\CachethuhoitaisanDecorator($repository);
+            }
+        );
 // add bindings
+
 
     }
 }

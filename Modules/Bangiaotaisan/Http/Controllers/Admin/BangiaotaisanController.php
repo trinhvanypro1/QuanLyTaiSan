@@ -116,6 +116,35 @@ class BangiaotaisanController extends AdminBaseController
      * @param  Bangiaotaisan $bangiaotaisan
      * @return Response
      */
+     public function thuhoi(Bangiaotaisan $bangiaotaisan){
+
+        $taisans=DB::table('taisan')->get();
+        $users = DB::table('users')->get();
+        $phongbans = DB::table('danhmucphongban')->get();
+        $nhanviens = DB::table('danhmucnhanvien')->get();
+        return view('bangiaotaisan::admin.bangiaotaisans.thuhoi', compact('bangiaotaisan'))
+        ->with('taisans',$taisans)
+        ->with('users',$users)
+        ->with('phongbans',$phongbans)
+        ->with('nhanviens',$nhanviens);
+     }
+
+     
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  CreateBangiaotaisanRequest $request
+     * @return Response
+     */
+     public function dsthuhoi( CreateBangiaotaisanRequest $request){
+
+     }
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  Bangiaotaisan $bangiaotaisan
+     * @return Response
+     */
     public function edit(Bangiaotaisan $bangiaotaisan)
     {
         return view('bangiaotaisan::admin.bangiaotaisans.edit', compact('bangiaotaisan'));

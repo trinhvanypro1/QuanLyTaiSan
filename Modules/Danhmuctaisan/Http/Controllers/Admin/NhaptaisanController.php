@@ -6,6 +6,7 @@ use DB;
 use PharIo\Manifest\Url;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Bangiaotaisan\Entities\Bangiaotaisan;
 use Modules\Danhmuctaisan\Entities\Nhaptaisan;
 use Modules\Danhmuctaisan\Http\Requests\CreateNhaptaisanRequest;
 use Modules\Danhmuctaisan\Http\Requests\UpdateNhaptaisanRequest;
@@ -213,12 +214,17 @@ class NhaptaisanController extends AdminBaseController
      */
     public function usage_history(Nhaptaisan $nhaptaisan)
     {
-        
-        $join_bangiao = DB::table('bangiaotaisan')->get();
-        
-        
+    
+        $bangiaotaisans = DB::table('bangiaotaisan')->get();
+        $users = DB::table('users')->get();
+        $phongbans = DB::table('danhmucphongban')->get();
+        $nhanviens = DB::table('danhmucnhanvien')->get();
         return view('danhmuctaisan::admin.nhaptaisans.usage-history', compact('nhaptaisan'))
-        ->with('join_bangiao',$join_bangiao);
+        ->with('bangiaotaisans',$bangiaotaisans)
+        ->with('users',$users)
+        ->with('phongbans',$phongbans)
+        ->with('nhanviens',$nhanviens);
+        
         
     }
 

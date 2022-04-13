@@ -22,4 +22,5 @@ class Bangiaotaisan extends Model
         'tinh_trang',
         'ngay_ban_giao'
     ];
+    
 }

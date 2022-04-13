@@ -83,6 +83,7 @@
 
                                 <td>
                                     <div class="btn-group">
+                                        
                                         <a href="{{ route('admin.bangiaotaisan.bangiaotaisan.edit', [$bangiaotaisan->id]) }}" class="btn btn-default btn-flat"><i class="fa fa-pencil"></i></a>
                                         <button class="btn btn-danger btn-flat" data-toggle="modal" data-target="#modal-delete-confirmation" data-action-target="{{ route('admin.bangiaotaisan.bangiaotaisan.destroy', [$bangiaotaisan->id]) }}"><i class="fa fa-trash"></i></button>
                                     </div>
