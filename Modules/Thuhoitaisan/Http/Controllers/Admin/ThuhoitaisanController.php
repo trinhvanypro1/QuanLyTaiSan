@@ -80,10 +80,39 @@ class ThuhoitaisanController extends AdminBaseController
      */
     public function store(CreateThuhoitaisanRequest $request)
     {
-        $this->thuhoitaisan->create($request->all());
 
+        $data= array();
+        $data['ngaythuhoi']=$request->ngaythuhoi;
+        $data['nhanvienthuhoi_id']=$request->nhanvienthuhoi;
+        $data['bophanbithuhoi_id']=$request->phongbanbithuhoi;
+        $data['nhanvienbithuhoi_id']=$request->nhanvienbithuhoi;
+        $data['soluong']=$request->soluong;
+        $data['tinhtrang']=$request->tinhtrang;
+        $data['lydothuhoi']=$request->lydothuhoi;
+        $data['taisan_id']=$request->taisanthuhoi;
+
+        $taisan = DB::table('taisan')->where('id','=',$request->taisanthuhoi)
+        ->increment('soluong', (int) $request->soluong);
+        
+        $thuhoi = DB::table('bangiaotaisan')->where('taisan_id','=',$request->taisanthuhoi)
+        ->decrement('so_luong_ban_giao', (int) $request->soluong);
+
+        do {
+            $timestamp = mt_rand(0, 9999);
+            $mathuhoi = 'MTH-'.date("Yd-").$timestamp;
+         } while ( DB::table( 'thuhoitaisan' )->where( 'mathuhoi',$mathuhoi  )->exists() );
+        $data['mathuhoi']=$mathuhoi;
+
+
+        DB::table('thuhoitaisan')->insert($data);
         return redirect()->route('admin.thuhoitaisan.thuhoitaisan.index')
-            ->withSuccess(trans('core::core.messages.resource created', ['name' => trans('thuhoitaisan::thuhoitaisans.title.thuhoitaisans')]));
+        ->with('mathuhoi',$mathuhoi)
+        ->with('taisan',$taisan)
+        ->with('thuhoi',$thuhoi);
+        // $this->thuhoitaisan->create($request->all());
+
+        // return redirect()->route('admin.thuhoitaisan.thuhoitaisan.index')
+        //     ->withSuccess(trans('core::core.messages.resource created', ['name' => trans('thuhoitaisan::thuhoitaisans.title.thuhoitaisans')]));
     }
 
     /**

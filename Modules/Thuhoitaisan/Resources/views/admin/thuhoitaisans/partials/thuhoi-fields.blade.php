@@ -5,7 +5,6 @@
             <div class="card">
                 <div class="card-header">
                 <div class="card-body">
-                    <h3>Lịch Sử Bàn Giao</h3>
                     <table  class="table table-striped table-bordered table-hover">
                     <?php foreach ($taisans as $taisan): ?>
                             <?php if ($taisan->id == $bangiaotaisan->taisan_id): ?>
@@ -40,8 +39,8 @@
 
                                     <div class="col-md-6">
                                         <label for="text">Nhân Viên Thu Hồi</label>
-                                        <select name="" class="form-control">  
-                                            <option value="nhanvienthuhoi">--Chọn Nhân Viên Thu Hồi--</option>
+                                        <select name="nhanvienthuhoi" class="form-control">  
+                                            <option value="">--Chọn Nhân Viên Thu Hồi--</option>
                                             @foreach($users as $key => $user) 
                                                 <option value="{{$user->id}}">{{$user->last_name}} {{$user->first_name}}</option>
                                             @endforeach
@@ -50,16 +49,6 @@
                                 </div>
                             <br>
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="text">Nhân Viên Bị Thu Hồi</label>
-                                        <?php foreach ($nhanviens as $nhanvien): ?>
-                                            <?php if ($nhanvien->id == $bangiaotaisan->nhanviennhantaisan_id): ?>
-                                                <select name="nhanvienbithuhoi" class="form-control">  
-                                                    <option value="{{$nhanvien->id}}">{{$nhanvien->tennhanvien}}</option>
-                                                </select>
-                                            <?php endif; ?>
-                                        <?php endforeach; ?>
-                                    </div>
 
                                     <div class="col-md-6">
                                         <label for="exampleInputPassword1">Bộ Phận Bị Thu Hồi</label>
@@ -71,6 +60,18 @@
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <label for="text">Nhân Viên Bị Thu Hồi</label>
+                                        <?php foreach ($nhanviens as $nhanvien): ?>
+                                            <?php if ($nhanvien->id == $bangiaotaisan->nhanviennhantaisan_id): ?>
+                                                <select name="nhanvienbithuhoi" class="form-control">  
+                                                    <option value="{{$nhanvien->id}}">{{$nhanvien->tennhanvien}}</option>
+                                                </select>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </div>
+
                                 </div>
                                 <br>
                                 <div class="row">
