@@ -2,7 +2,7 @@
 
 @section('content-header')
     <h1>
-        {{ trans('Danh Sách Mượn') }}
+        {{ trans('Danh Sách Thu Hồi Tài Sản') }}
     </h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> {{ trans('core::core.breadcrumb.home') }}</a></li>
@@ -30,57 +30,55 @@
                         <table class="data-table table table-bordered table-hover">
                             <thead>
                             <tr>
-                                <th>Tên Tài Sản</th>
-                                <th>Số Lượng</th>
-                                <th>Ngày Mượn</th>
-                                <th>Người Bàn Giao</th>
-                                <th>Bộ Phận Mượn</th>
-                                <th>Nhân Viên Mượn</th>
-                                <th>Tính Năng</th>
+                                <th>Mã Phiếu Thu Hồi</th>
+                                <th>Tên Tài Sản Thu Hồi</th>
+                                <th>Số Lượng Thu Hồi</th>
+                                <th>Ngày Thu Hồi</th>
+                                <th>Người Thu Hồi</th>
+                                <th>Bộ Phận Bị Thu Hồi</th>
+                                <th>Nhân Viên Bị Thu Hồi</th>
+                                <th>Tình Trạng Tài Sản</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php if (isset($muontaisans)): ?>
-                            <?php foreach ($muontaisans as $muontaisan): ?>
+                            <?php if (isset($thuhoitaisans)): ?>
+                            <?php foreach ($thuhoitaisans as $thuhoitaisan): ?>
                             <tr>
-                                
+                                <td>{{$thuhoitaisan->mathuhoi}}</td>
+
                                 <?php foreach ($join_taisan as $taisan): ?>
-                                    <?php if ($taisan->id == $muontaisan->taisan_id): ?>
+                                    <?php if ($taisan->id == $thuhoitaisan->taisan_id): ?>
                                         <td>{{$taisan->tentaisan}}</td>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
 
-                                <?php if ($muontaisan->so_luong_ban_giao < 0): ?>
+                                <?php if ($thuhoitaisan->soluong < 0): ?>
                                     <td>0</td>
                                 <?php else: ?>
-                                    <td>{{$muontaisan->so_luong_ban_giao}}</td>
+                                    <td>{{$thuhoitaisan->soluong}}</td>
                                 <?php endif; ?>
                                 
-
-                                <td>{{$muontaisan->ngay_ban_giao}}</td>
+                                <td>{{$thuhoitaisan->ngaythuhoi}}</td>
 
                                 <?php foreach ($join_user as $user): ?>
-                                    <?php if ($user->id == $muontaisan->nhanvienbangiao_id): ?>
+                                    <?php if ($user->id == $thuhoitaisan->nhanvienthuhoi_id): ?>
                                         <td>{{$user->first_name}} {{$user->last_name}}</td>
                                     <?php endif; ?>
                                 <?php endforeach; ?> 
                                     
                                 <?php foreach ($join_phongban as $phongban): ?>
-                                    <?php if ($phongban->id == $muontaisan->phongbannhantaisan_id): ?>
+                                    <?php if ($phongban->id == $thuhoitaisan->bophanbithuhoi_id): ?>
                                         <td>{{$phongban->tenphongban}}</td>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
 
                                 <?php foreach ($join_nhanvien as $nhanvien): ?>
-                                    <?php if ($nhanvien->id == $muontaisan->nhanviennhantaisan_id): ?>
+                                    <?php if ($nhanvien->id == $thuhoitaisan->nhanvienbithuhoi_id): ?>
                                         <td>{{$nhanvien->tennhanvien}}</td>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
 
-                                <td>
-                                    <a href="{{ route('admin.thuhoitaisan.thuhoitaisan.thuhoi',[$muontaisan->id]) }}" class="btn btn-primary btn-flat" style="padding: 4px 10px;">
-                                    <i class="fa fa-random"></i> {{ trans('Thu Hồi') }}</a>        
-                                </td>
+                                <td>{{$thuhoitaisan->tinhtrang}}</td>
                             </tr>
                             <?php endforeach; ?>
                             <?php endif; ?>

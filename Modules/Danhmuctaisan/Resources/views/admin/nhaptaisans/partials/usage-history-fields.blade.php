@@ -22,6 +22,7 @@
                 <div class="card-body">
                     <h3>Lịch Sử Bàn Giao</h3>
                     <table  class="table table-striped table-bordered table-hover">
+                        <br>
                         <?php foreach ($bangiaotaisans as $bangiao): ?>
                             <?php if ($bangiao->taisan_id == $nhaptaisan->id): ?>
                                 <tr>
@@ -74,35 +75,53 @@
                     <hr>
                     <h3>Lịch Sử Thu Hồi</h3>
                     <table  class="table table-striped table-bordered table-hover">
-                        <?php foreach ($bangiaotaisans as $bangiao): ?>
-                            <?php if ($bangiao->taisan_id == $nhaptaisan->id): ?>
+                        <?php foreach ($thuhoitaisans as $thuhoi): ?>
+                            <?php if ($thuhoi->taisan_id == $nhaptaisan->id): ?>
                                 <tr>
                                     <th>Trạng Thái</th>
-                                    <td>Đang bàn giao</td>
+                                    <td>Đã thu hồi</td>
 
-                                    <th>Nhân Viên Bàn Giao</th>
+                                    <th>Mã Phiếu Thu Hồi</th>
+                                    <td>{{$thuhoi->mathuhoi}}</td>
+
+                                </tr>
+
+                                <tr>
+                                    <th>Trạng Thái Tài Sản</th>
+                                    <td>{{$thuhoi->tinhtrang}}</td>
+
+                                    <th>Nhân Viên Thu Hồi</th>
                                     <?php foreach ($users as $user): ?>
-                                        <?php if ($user->id == $bangiao->nhanvienbangiao_id): ?>
+                                        <?php if ($user->id == $thuhoi->nhanvienthuhoi_id): ?>
                                             <td>{{ $user -> first_name}} {{ $user -> last_name}}</td>
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </tr>
 
                                 <tr>
-                                    <th>Phong Ban Mượn Tài Sản</th>
+                                    <th>Phong Ban Bị Thu Hồi</th>
                                     <?php foreach ($phongbans as $phongban): ?>
-                                        <?php if ($phongban->id == $bangiao->phongbannhantaisan_id): ?>
+                                        <?php if ($phongban->id == $thuhoi->bophanbithuhoi_id): ?>
                                             <td>{{ $phongban -> tenphongban}}</td>
                                         <?php endif; ?>
                                     <?php endforeach; ?>
 
-                                    <th>Nhân Viên Mượn Tài Sản</th>
+                                    <th>Nhân Viên Bị Thu Hồi</th>
                                     <?php foreach ($nhanviens as $nhanvien): ?>
-                                        <?php if ($nhanvien->id == $bangiao->nhanviennhantaisan_id): ?>
+                                        <?php if ($nhanvien->id == $thuhoi->nhanvienbithuhoi_id): ?>
                                             <td>{{ $nhanvien -> tennhanvien}}</td>
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </tr>
+                                <tr>
+                                    <th>Ngày Thu Hồi</th>
+                                    <td>{{$thuhoi->ngaythuhoi}}</td>
+
+                                    <th>Số Lượng Thu Hồi</th>
+                                    <td>{{$thuhoi->soluong}}</td>
+                                </tr>
+                                <?php else: ?>
+                                    <p>Chưa</p>
                             <?php endif; ?>
                         <?php endforeach; ?>
                     </table>

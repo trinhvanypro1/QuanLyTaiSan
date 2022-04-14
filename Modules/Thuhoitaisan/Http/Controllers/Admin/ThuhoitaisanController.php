@@ -48,6 +48,19 @@ class ThuhoitaisanController extends AdminBaseController
             ->with('muontaisans',$muontaisans);
     }
 
+    public function dsthuhoitaisan(){
+        $thuhoitaisans = DB::table('thuhoitaisan')->get();
+        $join_taisan = DB::table('taisan')->get();
+        $join_phongban = DB::table('danhmucphongban')->get();
+        $join_nhanvien = DB::table('danhmucnhanvien')->get();
+        $join_user = DB::table('users')->get();
+        return view('thuhoitaisan::admin.thuhoitaisans.dsthuhoitaisan')
+        ->with('join_taisan',$join_taisan)
+        ->with('join_user',$join_user)
+        ->with('join_phongban',$join_phongban)
+        ->with('join_nhanvien',$join_nhanvien)
+        ->with('thuhoitaisans',$thuhoitaisans);
+    }
     public function thuhoi(Bangiaotaisan $bangiaotaisan){
         $taisans=DB::table('taisan')->get();
         $users = DB::table('users')->get();

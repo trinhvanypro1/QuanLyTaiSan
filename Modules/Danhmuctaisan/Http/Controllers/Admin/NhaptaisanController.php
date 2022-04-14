@@ -216,11 +216,13 @@ class NhaptaisanController extends AdminBaseController
     {
     
         $bangiaotaisans = DB::table('bangiaotaisan')->get();
+        $thuhoitaisans = DB::table('thuhoitaisan')->get();
         $users = DB::table('users')->get();
         $phongbans = DB::table('danhmucphongban')->get();
         $nhanviens = DB::table('danhmucnhanvien')->get();
         return view('danhmuctaisan::admin.nhaptaisans.usage-history', compact('nhaptaisan'))
         ->with('bangiaotaisans',$bangiaotaisans)
+        ->with('thuhoitaisans',$thuhoitaisans)
         ->with('users',$users)
         ->with('phongbans',$phongbans)
         ->with('nhanviens',$nhanviens);
