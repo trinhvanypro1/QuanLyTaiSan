@@ -11,7 +11,13 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="text">Tên Tài Sản</label>
-                                        <input type="text" value="{{$taisan->tentaisan}}" class="form-control" name="taisanthuhoi">
+                                        <?php foreach ($taisans as $taisan): ?>
+                                            <?php if ($taisan->id == $bangiaotaisan->taisan_id): ?>
+                                                <select name="taisanthuhoi" class="form-control">  
+                                                    <option value="{{$taisan->id}}">{{$taisan->tentaisan}}</option>
+                                                </select>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
                                     </div>
 
                                     <div class="col-md-6">

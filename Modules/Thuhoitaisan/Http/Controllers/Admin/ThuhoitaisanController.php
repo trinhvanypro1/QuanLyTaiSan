@@ -92,7 +92,7 @@ class ThuhoitaisanController extends AdminBaseController
         $data['taisan_id']=$request->taisanthuhoi;
 
         $taisan = DB::table('taisan')->where('id','=',$request->taisanthuhoi)
-        ->increment('soluong', (int) $request->soluong);
+        ->decrement('soluong', (int) $request->soluong);
         
         $thuhoi = DB::table('bangiaotaisan')->where('taisan_id','=',$request->taisanthuhoi)
         ->decrement('so_luong_ban_giao', (int) $request->soluong);
