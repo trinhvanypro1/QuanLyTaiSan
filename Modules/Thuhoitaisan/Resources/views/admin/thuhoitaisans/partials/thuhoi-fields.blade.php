@@ -5,6 +5,19 @@
             <div class="card">
                 <div class="card-header">
                 <div class="card-body">
+                    <div class="text-right">
+                    <?php foreach ($taisans as $taisan): ?>
+                        <?php if ($taisan->id == $bangiaotaisan->taisan_id): ?>
+                            <?php foreach ($taisans as $taisan): ?>
+                                <?php if ($taisan->id == $bangiaotaisan->taisan_id): ?>
+                                    <img class="img-thumbnail"
+                                        src="/public/images/{{ $taisan->hinhanh }} "
+                                            height="170" width="170">
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                    </div>
                     <table  class="table table-striped table-bordered table-hover">
                     <?php foreach ($taisans as $taisan): ?>
                             <?php if ($taisan->id == $bangiaotaisan->taisan_id): ?>
@@ -14,7 +27,7 @@
                                         <?php foreach ($taisans as $taisan): ?>
                                             <?php if ($taisan->id == $bangiaotaisan->taisan_id): ?>
                                                 <select name="taisanthuhoi" class="form-control">  
-                                                    <option value="{{$taisan->id}}">{{$taisan->tentaisan}}</option>
+                                                    <option value="{{$taisan->id}}">{{$taisan->tentaisan}} |SL mượn: {{$bangiaotaisan->so_luong_ban_giao}}</option>
                                                 </select>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
@@ -29,14 +42,15 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="exampleInputPassword1">Tình Trạng Tài Sản</label>
-                                        <select name="tinhtrang" class="form-control" 
+                                        <select name="tinhtrang" class="form-control tinhtrang" 
                                         onchange="if(this.options[this.selectedIndex].value=='customOption'){
                                             toggleField(this,this.nextSibling);
                                             this.selectedIndex='0';
                                         }">
-                                            <option>--Chọn--</option>
-                                            <option>Bình Thường</option>
-                                            <option>Hư hỏng</option>
+                                            <option value="">--Chọn--</option>
+                                            <option value="1">Bình Thường</option>
+                                            <option value="2">Hư Hỏng</option>
+                                            <option value="3">Mất Tài Sản</option>
                                             <option value="customOption">--Khác--</option>
 
                                             </select><input name="tinhtrang" class="form-control" style="display:none;" disabled="disabled" 

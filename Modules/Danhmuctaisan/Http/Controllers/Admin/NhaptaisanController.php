@@ -41,11 +41,7 @@ class NhaptaisanController extends AdminBaseController
         
         return view('danhmuctaisan::admin.nhaptaisans.index', compact('nhaptaisans'))
         ->with('join_loaitaisan',$join_loaitaisan)->with('join_nhacungcap',$join_nhacungcap);
-        // $nhaptaisans = DB::table('taisan')
-        // ->join('danhmucloaitaisan','danhmucloaitaisan.id','=','taisan.loaitaisan_id')
-        // ->join('danhmucnhacungcap','danhmucnhacungcap.id','=','taisan.nhacungcap_id')->orderby('taisan.id','desc')->get();
-        // $manager_taisan = view('danhmuctaisan::admin.nhaptaisans.index')->with('nhaptaisans',$nhaptaisans);
-        // return view('layouts.master')->with('danhmuctaisan::admin.nhaptaisans.index',$manager_taisan);
+        
     }
 
     /**
@@ -218,6 +214,7 @@ class NhaptaisanController extends AdminBaseController
         $bangiaotaisans = DB::table('bangiaotaisan')->get();
         $thuhoitaisans = DB::table('thuhoitaisan')->get();
         $users = DB::table('users')->get();
+        $taisans = DB::table('taisan')->get();
         $phongbans = DB::table('danhmucphongban')->get();
         $nhanviens = DB::table('danhmucnhanvien')->get();
         return view('danhmuctaisan::admin.nhaptaisans.usage-history', compact('nhaptaisan'))
@@ -225,6 +222,7 @@ class NhaptaisanController extends AdminBaseController
         ->with('thuhoitaisans',$thuhoitaisans)
         ->with('users',$users)
         ->with('phongbans',$phongbans)
+        ->with('taisans',$taisans)
         ->with('nhanviens',$nhanviens);
         
         

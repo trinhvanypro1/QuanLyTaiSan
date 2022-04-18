@@ -21,6 +21,13 @@
                 </div>
             </div>
             <div class="box box-primary">
+                    <div class="card-body">
+                        <div class="box-header">
+                            <a class="btn btn-primary" href="{{ route('admin.danhmuctaisan.nhaptaisan.index')}}"></i>Danh Sách Tài Sản</a>
+                            <a class="btn btn-primary" href="{{ route('admin.danhmuctaisan.nhaptaisan.usage-history')}}"></i>Lịch Sử Dùng</a>
+                        </div>
+                        
+                    </div>
                 <div class="box-header">
                 </div>
                 <!-- /.box-header -->

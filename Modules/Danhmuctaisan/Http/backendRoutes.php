@@ -12,6 +12,10 @@ $router->group(['prefix' =>'/danhmuctaisan'], function (Router $router) {
         'uses' => 'NhaptaisanController@index',
         'middleware' => 'can:danhmuctaisan.nhaptaisans.index'
     ]);
+    $router->get('nhaptaisans/usage-history', [
+        'as' => 'admin.danhmuctaisan.nhaptaisan.usage-history',
+        'uses' => 'NhaptaisanController@usage_history'
+    ]);
     $router->get('nhaptaisans/create', [
         'as' => 'admin.danhmuctaisan.nhaptaisan.create',
         'uses' => 'NhaptaisanController@create',
@@ -43,11 +47,6 @@ $router->group(['prefix' =>'/danhmuctaisan'], function (Router $router) {
         'middleware' => 'can:danhmuctaisan.nhaptaisans.details'
     ]);
 
-    $router->get('nhaptaisans/{nhaptaisan}/usage-history', [
-        'as' => 'admin.danhmuctaisan.nhaptaisan.usage-history',
-        'uses' => 'NhaptaisanController@usage_history'
-    ]);
-
     $router->bind('suachua', function ($id) {
         return app('Modules\Danhmuctaisan\Repositories\SuachuaRepository')->find($id);
     });
@@ -56,15 +55,35 @@ $router->group(['prefix' =>'/danhmuctaisan'], function (Router $router) {
         'uses' => 'SuachuaController@index',
         'middleware' => 'can:danhmuctaisan.suachuas.index'
     ]);
+    $router->get('suachuas/danhsachtaisanmat', [
+        'as' => 'admin.danhmuctaisan.suachua.dsmat',
+        'uses' => 'SuachuaController@dsmat'
+    ]);
+    $router->get('suachuas/danhsachsuachua', [
+        'as' => 'admin.danhmuctaisan.suachua.dssuachua',
+        'uses' => 'SuachuaController@dssuachua'
+    ]);
     $router->get('suachuas/create', [
         'as' => 'admin.danhmuctaisan.suachua.create',
         'uses' => 'SuachuaController@create',
         'middleware' => 'can:danhmuctaisan.suachuas.create'
     ]);
+    $router->get('suachuas/{thuhoitaisan}/taosuachua', [
+        'as' => 'admin.danhmuctaisan.suachua.taosuachua',
+        'uses' => 'SuachuaController@taosuachua'
+    ]);
+    $router->get('suachuas/{suachua}/capnhatsuachua', [
+        'as' => 'admin.danhmuctaisan.suachua.capnhatsuachua',
+        'uses' => 'SuachuaController@capnhatsuachua'
+    ]);
     $router->post('suachuas', [
         'as' => 'admin.danhmuctaisan.suachua.store',
         'uses' => 'SuachuaController@store',
         'middleware' => 'can:danhmuctaisan.suachuas.create'
+    ]);
+    $router->post('suachuas', [
+        'as' => 'admin.danhmuctaisan.suachua.cnsuachua',
+        'uses' => 'SuachuaController@cnsuachua'
     ]);
     $router->get('suachuas/{suachua}/edit', [
         'as' => 'admin.danhmuctaisan.suachua.edit',

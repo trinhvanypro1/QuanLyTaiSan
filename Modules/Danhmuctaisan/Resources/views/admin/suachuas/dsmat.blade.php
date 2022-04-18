@@ -2,11 +2,11 @@
 
 @section('content-header')
     <h1>
-        {{ trans('Danh Sách Tài Sản Hư Hỏng') }}
+        {{ trans('Danh Sách Tài Sản Mất') }}
     </h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> {{ trans('core::core.breadcrumb.home') }}</a></li>
-        <li class="active">{{ trans('Danh Sách Tài Sản Hư Hỏng') }}</li>
+        <li class="active">{{ trans('Danh Sách Tài Sản Mất') }}</li>
     </ol>
 @stop
 
@@ -31,15 +31,15 @@
                             <tr>
                                 <th>Tên Tài Sản</th>
                                 <th>Số Lượng</th>
-                                <th>Bộ Phận Làm Hư</th>
-                                <th>Nhân Viên Làm Hư</th>
+                                <th>Bộ Phận Làm Mất</th>
+                                <th>Nhân Viên Làm Mất</th>
                                 <th>Tình Trạng Tài Sản</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php if (isset($biencotaisans)): ?>
                             <?php foreach ($biencotaisans as $bienco): ?>
-                                <?php if ($bienco->tinhtrang==2): ?>
+                                <?php if ($bienco->tinhtrang==3): ?>
                                     <tr>
                                         <?php foreach ($join_taisan as $taisan): ?>
                                             <?php if ($taisan->id == $bienco->taisan_id): ?>
@@ -69,10 +69,7 @@
                                             <td>Mất Tài Sản</td>
                                         <?php endif; ?>
 
-                                        <td>
-                                            <a href="{{ route('admin.danhmuctaisan.suachua.taosuachua',[$bienco->id]) }}" class="btn btn-primary btn-flat" style="padding: 4px 10px;">
-                                            <i class="fa fa-random"></i> {{ trans('Sửa Chữa') }}</a>      
-                                        </td>
+
                                     </tr>
                                 <?php endif; ?>
                             <?php endforeach; ?>
@@ -116,7 +113,7 @@
                 "paginate": true,
                 "lengthChange": true,
                 "filter": true,
-                "sort": true,
+                "sort": false,
                 "info": true,
                 "autoWidth": true,
                 "order": [[ 0, "desc" ]],

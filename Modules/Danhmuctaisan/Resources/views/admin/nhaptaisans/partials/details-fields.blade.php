@@ -8,7 +8,7 @@
                         <div class="box-header">
                         <a class="btn btn-primary" href="{{ route('admin.danhmuctaisan.nhaptaisan.index')}}"></i>Danh Sách Tài Sản</a>
                         <a class="btn btn-primary" href="{{ route('admin.danhmuctaisan.nhaptaisan.details', [$nhaptaisan->id])}}"></i>Thông Tin Tài Sản</a>
-                        <a class="btn btn-primary" href="{{ route('admin.danhmuctaisan.nhaptaisan.usage-history', [$nhaptaisan->id])}}"></i>Lịch Sử Dùng</a>
+                        
                         </div>
                     </div>
                 <hr>

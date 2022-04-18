@@ -43,7 +43,7 @@ class RegisterThuhoitaisanSidebar implements \Maatwebsite\Sidebar\SidebarExtende
                 $item->authorize(
                      /* append */
                 );
-                $item->item(trans('Danh Sách Thu Hồi'), function (Item $item) {
+                $item->item(trans('Danh Sách Mượn & Thu Hồi'), function (Item $item) {
                     $item->icon('fa fa-circle-thin');
                     $item->weight(0);
                     $item->append('admin.thuhoitaisan.thuhoitaisan.create');

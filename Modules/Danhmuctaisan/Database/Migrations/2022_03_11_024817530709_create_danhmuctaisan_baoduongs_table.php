@@ -15,14 +15,14 @@ class CreateDanhmuctaisanBaoduongsTable extends Migration
         Schema::create('baoduong', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('mataisan');
-            $table->string('phanloaitaisan');
+            $table->integer('taisan_id');
             $table->string('loaibaoduong');
-            $table->string('manhacungcap');
+            $table->integer('nhanvienbaoduong_id');
+            $table->integer('nhacungcap_id');
             $table->date('ngaybaoduong');
             $table->date('ngayketthucbaoduong');
-            $table->string('manhanvienbaoduong');
             $table->text('motahuhai');
+            $table->timestamps();
         });
     }
 
@@ -33,6 +33,6 @@ class CreateDanhmuctaisanBaoduongsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('danhmuctaisan__baoduongs');
+        Schema::dropIfExists('baoduong');
     }
 }

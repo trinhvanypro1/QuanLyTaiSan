@@ -2,6 +2,7 @@
 
 namespace Modules\Danhmuctaisan\Http\Controllers\Admin;
 
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Danhmuctaisan\Entities\Baoduong;
@@ -31,9 +32,9 @@ class BaoduongController extends AdminBaseController
      */
     public function index()
     {
-        //$baoduongs = $this->baoduong->all();
+        $baoduongs = $this->baoduong->all();
 
-        return view('danhmuctaisan::admin.baoduongs.index', compact(''));
+        return view('danhmuctaisan::admin.baoduongs.index', compact('baoduongs'));
     }
 
     /**
@@ -43,7 +44,13 @@ class BaoduongController extends AdminBaseController
      */
     public function create()
     {
-        return view('danhmuctaisan::admin.baoduongs.create');
+        $nhanvienbangiao = DB::table('users')->orderby('id','desc')->get();
+        $nhacungcap = DB::table('danhmucnhacungcap')->get();
+        $taisan= DB::table('taisan')->orderby('id','desc')->get();
+        return view('danhmuctaisan::admin.baoduongs.create')
+                            ->with('nhacungcap',$nhacungcap)
+                            ->with('taisan',$taisan)
+                            ->with('nhanvienbangiao',$nhanvienbangiao);
     }
 
     /**

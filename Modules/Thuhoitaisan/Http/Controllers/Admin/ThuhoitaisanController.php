@@ -91,37 +91,91 @@ class ThuhoitaisanController extends AdminBaseController
      * @param  CreateThuhoitaisanRequest $request
      * @return Response
      */
-    public function store(CreateThuhoitaisanRequest $request)
+    public function store(Request $request)
     {
 
-        $data= array();
-        $data['ngaythuhoi']=$request->ngaythuhoi;
-        $data['nhanvienthuhoi_id']=$request->nhanvienthuhoi;
-        $data['bophanbithuhoi_id']=$request->phongbanbithuhoi;
-        $data['nhanvienbithuhoi_id']=$request->nhanvienbithuhoi;
-        $data['soluong']=$request->soluong;
-        $data['tinhtrang']=$request->tinhtrang;
-        $data['lydothuhoi']=$request->lydothuhoi;
-        $data['taisan_id']=$request->taisanthuhoi;
 
-        $taisan = DB::table('taisan')->where('id','=',$request->taisanthuhoi)
-        ->decrement('soluong', (int) $request->soluong);
+        $tinhtrang = $request->tinhtrang;
+        if($tinhtrang==1){
+            $data= array();
+            $data['ngaythuhoi']=$request->ngaythuhoi;
+            $data['nhanvienthuhoi_id']=$request->nhanvienthuhoi;
+            $data['bophanbithuhoi_id']=$request->phongbanbithuhoi;
+            $data['nhanvienbithuhoi_id']=$request->nhanvienbithuhoi;
+            $data['soluong']=$request->soluong;
+            $data['tinhtrang']=$request->tinhtrang;
+            $data['lydothuhoi']=$request->lydothuhoi;
+            $data['taisan_id']=$request->taisanthuhoi;
+    
+            do {
+                $timestamp = mt_rand(0, 9999);
+                $mathuhoi = 'MTH-'.date("Yd-").$timestamp;
+             } while ( DB::table( 'thuhoitaisan' )->where( 'mathuhoi',$mathuhoi  )->exists() );
+            $data['mathuhoi']=$mathuhoi;
+            $taisan = DB::table('taisan')->where('id','=',$request->taisanthuhoi)
+            ->decrement('soluong', (int) $request->soluong);
+            
+            $thuhoi = DB::table('bangiaotaisan')->where('taisan_id','=',$request->taisanthuhoi)
+            ->decrement('so_luong_ban_giao', (int) $request->soluong);
+    
+            DB::table('thuhoitaisan')->insert($data);
+            return redirect()->route('admin.thuhoitaisan.thuhoitaisan.index')
+            ->with('mathuhoi',$mathuhoi)
+            ->with('taisan',$taisan)
+            ->with('thuhoi',$thuhoi);
+        }
+        elseif($tinhtrang==2){
+            $data= array();
+            $data['ngaythuhoi']=$request->ngaythuhoi;
+            $data['nhanvienthuhoi_id']=$request->nhanvienthuhoi;
+            $data['bophanbithuhoi_id']=$request->phongbanbithuhoi;
+            $data['nhanvienbithuhoi_id']=$request->nhanvienbithuhoi;
+            $data['soluong']=$request->soluong;
+            $data['tinhtrang']=$request->tinhtrang;
+            $data['lydothuhoi']=$request->lydothuhoi;
+            $data['taisan_id']=$request->taisanthuhoi;
+    
+            do {
+                $timestamp = mt_rand(0, 9999);
+                $mathuhoi = 'MTH-'.date("Yd-").$timestamp;
+             } while ( DB::table( 'thuhoitaisan' )->where( 'mathuhoi',$mathuhoi  )->exists() );
+            $data['mathuhoi']=$mathuhoi;
+            
+            $thuhoi = DB::table('bangiaotaisan')->where('taisan_id','=',$request->taisanthuhoi)
+            ->decrement('so_luong_ban_giao', (int) $request->soluong);
+    
+            DB::table('thuhoitaisan')->insert($data);
+            return redirect()->route('admin.thuhoitaisan.thuhoitaisan.index')
+            ->with('mathuhoi',$mathuhoi)
+            ->with('thuhoi',$thuhoi);
+        }
+        else{
+            $data= array();
+            $data['ngaythuhoi']=$request->ngaythuhoi;
+            $data['nhanvienthuhoi_id']=$request->nhanvienthuhoi;
+            $data['bophanbithuhoi_id']=$request->phongbanbithuhoi;
+            $data['nhanvienbithuhoi_id']=$request->nhanvienbithuhoi;
+            $data['soluong']=$request->soluong;
+            $data['tinhtrang']=$request->tinhtrang;
+            $data['lydothuhoi']=$request->lydothuhoi;
+            $data['taisan_id']=$request->taisanthuhoi;
+    
+            do {
+                $timestamp = mt_rand(0, 9999);
+                $mathuhoi = 'MTH-'.date("Yd-").$timestamp;
+             } while ( DB::table( 'thuhoitaisan' )->where( 'mathuhoi',$mathuhoi  )->exists() );
+            $data['mathuhoi']=$mathuhoi;
+            
+            $thuhoi = DB::table('bangiaotaisan')->where('taisan_id','=',$request->taisanthuhoi)
+            ->decrement('so_luong_ban_giao', (int) $request->soluong);
+    
+            DB::table('thuhoitaisan')->insert($data);
+            return redirect()->route('admin.thuhoitaisan.thuhoitaisan.index')
+            ->with('mathuhoi',$mathuhoi)
+
+            ->with('thuhoi',$thuhoi);
+        }
         
-        $thuhoi = DB::table('bangiaotaisan')->where('taisan_id','=',$request->taisanthuhoi)
-        ->decrement('so_luong_ban_giao', (int) $request->soluong);
-
-        do {
-            $timestamp = mt_rand(0, 9999);
-            $mathuhoi = 'MTH-'.date("Yd-").$timestamp;
-         } while ( DB::table( 'thuhoitaisan' )->where( 'mathuhoi',$mathuhoi  )->exists() );
-        $data['mathuhoi']=$mathuhoi;
-
-
-        DB::table('thuhoitaisan')->insert($data);
-        return redirect()->route('admin.thuhoitaisan.thuhoitaisan.index')
-        ->with('mathuhoi',$mathuhoi)
-        ->with('taisan',$taisan)
-        ->with('thuhoi',$thuhoi);
         // $this->thuhoitaisan->create($request->all());
 
         // return redirect()->route('admin.thuhoitaisan.thuhoitaisan.index')

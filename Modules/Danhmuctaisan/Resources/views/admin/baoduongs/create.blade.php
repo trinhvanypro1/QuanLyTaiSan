@@ -2,12 +2,12 @@
 
 @section('content-header')
     <h1>
-        {{ trans('danhmuctaisan::baoduongs.title.create baoduong') }}
+        {{ trans('Bảo Dưỡng') }}
     </h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> {{ trans('core::core.breadcrumb.home') }}</a></li>
-        <li><a href="{{ route('admin.danhmuctaisan.baoduong.index') }}">{{ trans('danhmuctaisan::baoduongs.title.baoduongs') }}</a></li>
-        <li class="active">{{ trans('danhmuctaisan::baoduongs.title.create baoduong') }}</li>
+        <li><a href="{{ route('admin.danhmuctaisan.baoduong.index') }}">{{ trans('Danh Sách Bảo Dưỡng') }}</a></li>
+        <li class="active">{{ trans('Bảo Dưỡng') }}</li>
     </ol>
 @stop
 

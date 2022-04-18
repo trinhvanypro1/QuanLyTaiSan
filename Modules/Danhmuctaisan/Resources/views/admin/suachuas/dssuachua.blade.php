@@ -2,11 +2,11 @@
 
 @section('content-header')
     <h1>
-        {{ trans('Danh Sách Tài Sản Hư Hỏng') }}
+        {{ trans('Danh Sách Sữa Chữa') }}
     </h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> {{ trans('core::core.breadcrumb.home') }}</a></li>
-        <li class="active">{{ trans('Danh Sách Tài Sản Hư Hỏng') }}</li>
+        <li class="active">{{ trans('Danh Sách Sữa Chữa') }}</li>
     </ol>
 @stop
 
@@ -24,57 +24,64 @@
                             <a class="btn btn-primary" href="{{ route('admin.danhmuctaisan.suachua.index')}}"></i>Danh Sách Tài Sản Hư Hỏng</a>
                             <a class="btn btn-primary" href="{{ route('admin.danhmuctaisan.suachua.dsmat')}}"></i>Danh Sách Tài Sản Mất</a>
                             <a class="btn btn-primary" href="{{ route('admin.danhmuctaisan.suachua.dssuachua')}}"></i>Danh Sách Tài Sản Sữa Chữa</a>
-                            </div>
+                        </div>
                         </div>
                         <table class="data-table table table-bordered table-hover">
                             <thead>
                             <tr>
+                                <th>Mã Sửa Chữa</th>
                                 <th>Tên Tài Sản</th>
-                                <th>Số Lượng</th>
-                                <th>Bộ Phận Làm Hư</th>
-                                <th>Nhân Viên Làm Hư</th>
-                                <th>Tình Trạng Tài Sản</th>
+                                <th>Số Lượng Sửa Chữa</th>
+                                <th>Nhân Viên Nhập</th>
+                                <th>Nhà Cung Cấp</th>
+                                <th>Ngày Sửa Chữa</th>
+                                <th>Tình Trạng</th>
+                                <th>Tính Năng</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php if (isset($biencotaisans)): ?>
-                            <?php foreach ($biencotaisans as $bienco): ?>
-                                <?php if ($bienco->tinhtrang==2): ?>
+                            <?php if (isset($suachuas)): ?>
+                            <?php foreach ($suachuas as $suachua): ?>
                                     <tr>
+                                        <td>{{$suachua->masuachua}}</td>
+
                                         <?php foreach ($join_taisan as $taisan): ?>
-                                            <?php if ($taisan->id == $bienco->taisan_id): ?>
+                                            <?php if ($taisan->id == $suachua->taisansuachua_id): ?>
                                                 <td>{{$taisan->tentaisan}}</td>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
+                                        
+                                        <td>{{$suachua->soluongsuachua}}</td>
+                                        
 
-                                        <td>{{$bienco->soluong}}</td>
-
-                                        <?php foreach ($join_phongban as $phongban): ?>
-                                            <?php if ($phongban->id == $bienco->bophanbithuhoi_id): ?>
-                                                <td>{{$phongban->tenphongban}}</td>
+                                        <?php foreach ($join_user as $user): ?>
+                                            <?php if ($user->id == $suachua->nhanviennhap_id): ?>
+                                                <td>{{$user->last_name}} {{$user->first_name}}</td>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
 
-                                        <?php foreach ($join_nhanvien as $nhanvien): ?>
-                                            <?php if ($nhanvien->id == $bienco->nhanvienbithuhoi_id): ?>
-                                                <td>{{$nhanvien->tennhanvien}}</td>
+                                        <?php foreach ($join_nhacungcap as $nhacungcap): ?>
+                                            <?php if ($nhacungcap->id == $suachua->nhacungcap_id): ?>
+                                                <td>{{$nhacungcap->tennhacungcap}}</td>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
 
-                                        <?php if ($bienco->tinhtrang==1): ?>
+                                        <td>{{$suachua->ngaysuachua}}</td>
+                                        
+                                        <?php if ($suachua->tinhtrang==1): ?>
                                             <td>Bình Thường</td>
-                                        <?php elseif($bienco->tinhtrang==2): ?>
+                                        <?php elseif($suachua->tinhtrang==2): ?>
                                             <td>Hư Hỏng</td>
-                                        <?php elseif($bienco->tinhtrang==3): ?>
+                                        <?php elseif($suachua->tinhtrang==3): ?>
                                             <td>Mất Tài Sản</td>
                                         <?php endif; ?>
 
                                         <td>
-                                            <a href="{{ route('admin.danhmuctaisan.suachua.taosuachua',[$bienco->id]) }}" class="btn btn-primary btn-flat" style="padding: 4px 10px;">
-                                            <i class="fa fa-random"></i> {{ trans('Sửa Chữa') }}</a>      
+                                            <a href="{{ route('admin.danhmuctaisan.suachua.capnhatsuachua',[$suachua->id]) }}" class="btn btn-primary btn-flat" style="padding: 4px 10px;">
+                                            <i class="fa fa-random"></i> {{ trans('Cập Nhật Tình Trạng') }}</a>      
                                         </td>
                                     </tr>
-                                <?php endif; ?>
+                                
                             <?php endforeach; ?>
                             <?php endif; ?>
                             </tbody>

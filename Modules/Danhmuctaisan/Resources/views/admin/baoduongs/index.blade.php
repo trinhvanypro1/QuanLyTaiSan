@@ -2,7 +2,7 @@
 
 @section('content-header')
     <h1>
-        {{ trans('danhmuctaisan::baoduongs.title.baoduongs') }}
+        {{ trans('Bảo Dưỡng Tài Sản') }}
     </h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> {{ trans('core::core.breadcrumb.home') }}</a></li>

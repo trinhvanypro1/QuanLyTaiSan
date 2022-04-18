@@ -2,14 +2,18 @@
 
 namespace Modules\Danhmuctaisan\Entities;
 
-use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 
 class Suachua extends Model
 {
-    use Translatable;
+    protected $table = 'suachua';
 
-    protected $table = 'danhmuctaisan__suachuas';
-    public $translatedAttributes = [];
-    protected $fillable = [];
+    protected $fillable = [
+        'taisansuachua_id',
+        'nhanviennhap_id',
+        'nhacungcap_id',
+        'tinhtrang',
+        'ngaysuachua',
+        'motahuhai'
+    ];
 }

@@ -15,15 +15,13 @@ class CreateDanhmuctaisanSuachuasTable extends Migration
         Schema::create('suachua', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('mataisan');
-            $table->string('phanloaitaisan_id');
-            $table->string('manhacungcap');
+            $table->integer('taisansuachua_id');
+            $table->integer('nhanviennhap_id');
+            $table->integer('nhacungcap_id');
             $table->string('tinhtrang');
-            $table->float('chiphisuachua');
             $table->date('ngaysuachua');
-            $table->date('ngayketthucsuachua');
             $table->text('motahuhai')->nullable();
-            
+            $table->timestamps();
         });
     }
 

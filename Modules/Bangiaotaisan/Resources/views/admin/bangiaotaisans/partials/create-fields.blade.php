@@ -74,9 +74,7 @@
                 this.selectedIndex='0';
             }">
                 <option>--Chọn--</option>
-                <option>Tốt</option>
                 <option>Bình Thường</option>
-                <option>Hư hỏng</option>
                 <option value="customOption">--Khác--</option>
 
                 </select><input name="tinh_trang" class="form-control" style="display:none;" disabled="disabled" 

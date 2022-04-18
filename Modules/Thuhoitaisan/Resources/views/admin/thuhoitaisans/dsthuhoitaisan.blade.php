@@ -78,7 +78,13 @@
                                     <?php endif; ?>
                                 <?php endforeach; ?>
 
-                                <td>{{$thuhoitaisan->tinhtrang}}</td>
+                                <?php if ($thuhoitaisan->tinhtrang==1): ?>
+                                    <td>Bình Thường</td>
+                                <?php elseif($thuhoitaisan->tinhtrang==2): ?>
+                                    <td>Hư Hỏng</td>
+                                <?php elseif($thuhoitaisan->tinhtrang==3): ?>
+                                    <td>Mất Tài Sản</td>
+                                <?php endif; ?>
                             </tr>
                             <?php endforeach; ?>
                             <?php endif; ?>
